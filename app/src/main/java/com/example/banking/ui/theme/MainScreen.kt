@@ -52,7 +52,7 @@ fun MainScreen(accountViewModel: TestAccountVM) {
                 }
             )
         },
-        sheetPeekHeight = 450.dp,
+        sheetPeekHeight = 0.dp,
         sheetContainerColor = Dark
     ) {
         Column(
