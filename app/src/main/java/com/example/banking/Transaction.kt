@@ -13,23 +13,12 @@ import java.util.Date
         childColumns = ["accountId"]
     )]
 )
-class Transaction{
-    @PrimaryKey(autoGenerate = true) var id: Int = 0
-    var accountId: Int = 0
-    var name: String = ""
-    var number: String = ""
-    var date: String = ""
-    var status: String = ""
-    var amount: String = ""
-
-    constructor() {}
-
-    constructor(accountId: Int, name: String, number: String, date: String, status: String, amount: String) {
-        this.accountId = accountId
-        this.name = name
-        this.number = number
-        this.date = date
-        this.status = status
-        this.amount = amount
-    }
-}
+data class Transaction(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val accountId: Int,
+    val name: String,
+    val number: String,
+    val date: String,
+    val status: String,
+    val amount: String
+)

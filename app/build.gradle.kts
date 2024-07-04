@@ -73,4 +73,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     annotationProcessor(libs.androidx.room.room.compiler)
     ksp(libs.androidx.room.room.compiler)
+    implementation ("io.insert-koin:koin-androidx-compose:3.5.0")
 }
+

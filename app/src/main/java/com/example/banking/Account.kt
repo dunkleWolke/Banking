@@ -5,18 +5,9 @@ import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "accounts")
-class Account {
-    @PrimaryKey(autoGenerate = true) var id: Int = 0
-    var accountName: String = ""
-    var accountNumber: String = ""
-    var cardNumber: String = ""
-
-
-    constructor() {}
-
-    constructor(name: String, number: String, cardNumber: String) {
-        this.accountName = name
-        this.accountNumber = number
-        this.cardNumber = cardNumber
-    }
-}
+data class Account (
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val accountName: String,
+    val accountNumber: String,
+    val cardNumber: String
+)
