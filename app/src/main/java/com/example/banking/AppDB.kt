@@ -10,18 +10,4 @@ import androidx.room.RoomDatabase
 abstract class AppDB : RoomDatabase() {
     abstract fun accountDao(): AccountDao
 
-    companion object{
-        private var INSTANCE: AppDB? = null
-        fun getDB(context: Context): AppDB {
-            return INSTANCE ?: synchronized(this){
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDB::class.java,
-                    "m-banking",
-                ).build()
-                INSTANCE = instance
-                return instance
-            }
-        }
-    }
 }

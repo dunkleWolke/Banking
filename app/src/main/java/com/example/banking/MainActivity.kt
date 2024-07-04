@@ -29,20 +29,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        startKoin {
-            androidContext(this@MainActivity)
-            modules(appModule)
-        }
-
         setContent {
 
         }
     }
-}
-
-val appModule = module {
-
-    single { AppDB.getDB(get()).accountDao() }
-    single { AccountRepository(get()) }
-    viewModel { AccountVM(get()) }
 }
