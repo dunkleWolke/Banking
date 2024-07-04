@@ -18,13 +18,3 @@ class MyApplication : Application() {
     }
 }
 
-val appModule = module {
-
-    single {
-        Room.databaseBuilder(androidContext(), AppDB::class.java, "m-banking")
-            .build()
-            .accountDao()
-    }
-    single { AccountRepository(get()) }
-    viewModel { AccountVM(get()) }
-}

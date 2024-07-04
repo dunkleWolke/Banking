@@ -1,9 +1,9 @@
-package com.example.banking
+package com.example.banking.DB
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.banking.Model.Account
+import com.example.banking.Model.Transaction
 
 
 @Database(entities = [Account::class, Transaction::class], version = 1)

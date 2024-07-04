@@ -1,8 +1,10 @@
-package com.example.banking
+package com.example.banking.DB
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.banking.Model.Account
+import com.example.banking.Model.Transaction
 
 @Dao
 interface AccountDao {

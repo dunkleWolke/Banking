@@ -1,9 +1,8 @@
-package com.example.banking
+package com.example.banking.Model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import java.util.Date
 
 @Entity(
     tableName = "transactions",

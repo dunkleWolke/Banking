@@ -1,4 +1,4 @@
-package com.example.banking
+package com.example.banking.Model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

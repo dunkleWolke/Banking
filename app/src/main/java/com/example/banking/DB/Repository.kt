@@ -1,4 +1,7 @@
-package com.example.banking
+package com.example.banking.DB
+
+import com.example.banking.Model.Account
+import com.example.banking.Model.Transaction
 
 class AccountRepository(private val accountDao: AccountDao) {
 
