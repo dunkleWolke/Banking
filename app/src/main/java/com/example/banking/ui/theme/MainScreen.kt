@@ -14,10 +14,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
 import androidx.lifecycle.ViewModel
-import com.example.banking.Account
+import com.example.banking.Model.Account
 import com.example.banking.R
 
-import com.example.banking.Transaction
+import com.example.banking.Model.Transaction
+import com.example.banking.ui.theme.TransactionScreen.FilterByDateBottomSheet
 import kotlinx.coroutines.launch
 
 
@@ -38,9 +39,21 @@ fun MainScreen(accountViewModel: TestAccountVM) {
     val transactions by remember { mutableStateOf(accountViewModel.transactions.toTypedArray()) }
     var selectedAccount by remember { mutableStateOf(accounts.firstOrNull()) }
 
+    val filteredTransactions = transactions.filter { it.accountId == selectedAccount?.id }
+
+    var isFilterSheetVisible by remember { mutableStateOf(false) }
+
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
         sheetContent = {
+            if (isFilterSheetVisible) {
+                FilterByDateBottomSheet(onSubmit = {
+                    scope.launch {
+                        scaffoldState.bottomSheetState.hide()
+                        isFilterSheetVisible = false
+                    }
+                })
+            } else {
             SelectAccountBottomSheet(
                 accounts = accounts.toList(),
                 onAccountSelected = { account ->
@@ -51,7 +64,7 @@ fun MainScreen(accountViewModel: TestAccountVM) {
                     }
                 }
             )
-        },
+        }},
         sheetPeekHeight = 0.dp,
         sheetContainerColor = Dark
     ) {
@@ -77,13 +90,31 @@ fun MainScreen(accountViewModel: TestAccountVM) {
                     onClick = {
                         scope.launch {
                             scaffoldState.bottomSheetState.expand()
+                            isFilterSheetVisible = false
                         }
                     }
                 )
             }
 
-            ViewAllBlock(onClick = {})
-            RecentTransactionsBlock(transactions = transactions.toList())
+            ViewAllBlock(onClick = {
+            })
+            RecentTransactionsBlock(transactions = filteredTransactions)
+
+            Button(
+                onClick = { },
+                modifier = Modifier
+                    .align(Alignment.End)
+                    .padding(top = 16.dp),
+                colors = ButtonDefaults.buttonColors(Blue),
+                shape = RoundedCornerShape(60.dp)
+            ) {
+                Text(
+                    text = "+",
+                    color = White,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
     }
 }

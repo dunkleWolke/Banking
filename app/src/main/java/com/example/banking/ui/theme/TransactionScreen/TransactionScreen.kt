@@ -25,7 +25,7 @@ import com.example.banking.ui.theme.*
 @Composable
 fun showTransactionScreen(){
     val dummyViewModel = TestAccountVM()
-    TransactionScreen(dummyViewModel, Transaction(accountId = 1, name = "Dummy Transaction 1", number = "12345", date = "2024-07-02", status = "Pending", amount = "50.00"))
+    TransactionScreen(dummyViewModel)
 }
 
 
