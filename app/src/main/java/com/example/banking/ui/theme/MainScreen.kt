@@ -29,7 +29,6 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainActivity(){
 
-   // MainScreen(dummyViewModel)
 }
 
 @ExperimentalMaterial3Api

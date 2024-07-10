@@ -35,8 +35,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
-            val accountViewModel: AccountVM = getViewModel()
-            NavGraph(navController = navController, accountViewModel = accountViewModel)
+            NavGraph(navController = navController)
         }
     }
 }

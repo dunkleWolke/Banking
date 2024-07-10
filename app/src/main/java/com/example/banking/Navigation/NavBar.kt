@@ -11,11 +11,13 @@ import com.example.banking.AccountVM
 import com.example.banking.ui.theme.MainScreen
 import com.example.banking.ui.theme.TransactionScreen.AllTransactionsScreen
 import com.example.banking.ui.theme.TransactionScreen.TransactionScreen
+import org.koin.androidx.compose.getViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavGraph(navController: NavHostController, accountViewModel: AccountVM) {
+fun NavGraph(navController: NavHostController) {
+    val accountViewModel: AccountVM = getViewModel()
 
     NavHost(navController = navController, startDestination = "main_screen") {
         composable("main_screen") {
