@@ -1,6 +1,7 @@
-package com.example.banking.ui.theme
+package com.example.banking.screens.transactions.presentation.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,10 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.banking.Model.Transaction
+import com.example.banking.database.model.Transaction
+import com.example.banking.ui.theme.Gray
+import com.example.banking.ui.theme.White
+import com.example.banking.ui.theme.WhiteGray
 
 @Composable
-fun TransactionItem(transaction: Transaction) {
+fun TransactionItem(transaction: Transaction, onTransactionClick: (Transaction) -> Unit) {
     val textColor = when (transaction.status) {
         "Completed" -> Color.Green
         "Pending" -> Color.Yellow
@@ -33,6 +37,7 @@ fun TransactionItem(transaction: Transaction) {
             .fillMaxWidth()
             .padding(vertical = 8.dp)
             .background(Gray, shape = RoundedCornerShape(9.dp))
+            .clickable { onTransactionClick(transaction) }
             .padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically

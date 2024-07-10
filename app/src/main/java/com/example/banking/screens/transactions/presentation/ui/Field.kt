@@ -1,4 +1,4 @@
-package com.example.banking.ui.theme.TransactionScreen
+package com.example.banking.screens.transactions.presentation.ui
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -6,7 +6,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -16,7 +15,7 @@ import com.example.banking.ui.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Field(label: String, value: String, enabled: Boolean) {
+fun Field(label: String, value: String, enabled: Boolean, onValueChange: (String) -> Unit) {
 
     Text(
         text = label,
@@ -28,17 +27,17 @@ fun Field(label: String, value: String, enabled: Boolean) {
 
     OutlinedTextField(
         value = value,
-        onValueChange = {},
+        onValueChange = onValueChange,
         enabled = enabled,
         modifier = Modifier
             .fillMaxWidth(),
         shape = RoundedCornerShape(9.dp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = White,
-            unfocusedBorderColor = White,
-            cursorColor = White,
-            disabledTextColor = White,
-            disabledBorderColor = White
-        )
+//        colors = TextFieldDefaults.outlinedTextFieldColors(
+//            focusedBorderColor = White,
+//            unfocusedBorderColor = White,
+//            cursorColor = White,
+//            disabledTextColor = White,
+//            disabledBorderColor = White
+//        )
     )
 }

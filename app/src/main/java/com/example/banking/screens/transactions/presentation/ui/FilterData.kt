@@ -1,4 +1,4 @@
-package com.example.banking.ui.theme.TransactionScreen
+package com.example.banking.screens.transactions.presentation.ui
 
 import android.widget.CalendarView
 import androidx.compose.foundation.clickable
