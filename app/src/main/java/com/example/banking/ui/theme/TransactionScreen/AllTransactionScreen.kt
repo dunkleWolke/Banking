@@ -33,27 +33,30 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.example.banking.AccountVM
 import com.example.banking.ui.theme.Dark
 import com.example.banking.ui.theme.TestAccountVM
 import com.example.banking.ui.theme.TransactionItem
 import com.example.banking.ui.theme.White
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @Preview
 @Composable
 fun ShowAllTransaction() {
     val dummyViewModel = TestAccountVM()
-    AllTransactionsScreen(dummyViewModel)
+   // AllTransactionsScreen(dummyViewModel)
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AllTransactionsScreen(accountViewModel: TestAccountVM) {
+fun AllTransactionsScreen(navController: NavHostController, accountViewModel: AccountVM = koinViewModel()) {
     val scaffoldState = rememberBottomSheetScaffoldState()
     val scope = rememberCoroutineScope()
-    val accounts by remember { mutableStateOf(accountViewModel.accounts.toTypedArray()) }
-    val transactions by remember { mutableStateOf(accountViewModel.transactions.toTypedArray()) }
+    val accounts by remember { mutableStateOf(accountViewModel.accounts) }
+    val transactions by remember { mutableStateOf(accountViewModel.transactions) }
     var isFilterSheetVisible by remember { mutableStateOf(false) }
     var selectedAccount by remember { mutableStateOf(accounts.firstOrNull()) }
 
@@ -90,7 +93,7 @@ fun AllTransactionsScreen(accountViewModel: TestAccountVM) {
                         }
                     },
                     navigationIcon = {
-                        IconButton(onClick = { }) {
+                        IconButton(onClick = { navController.popBackStack() }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint =White)
                         }
                     },
@@ -113,7 +116,9 @@ fun AllTransactionsScreen(accountViewModel: TestAccountVM) {
             content = {
                 Column(modifier = Modifier.padding(it)) {
                     filteredTransactions.forEach { transaction ->
-                        TransactionItem(transaction)
+                        TransactionItem(transaction) {
+                            navController.navigate("transaction_screen/${transaction.id}")
+                        }
                     }
                 }
             },

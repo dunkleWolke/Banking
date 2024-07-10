@@ -14,29 +14,35 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavHostController
+import com.example.banking.AccountVM
 import com.example.banking.Model.Account
 import com.example.banking.R
 
 import com.example.banking.Model.Transaction
 import com.example.banking.ui.theme.TransactionScreen.FilterByDateBottomSheet
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun MainActivity(){
-    val dummyViewModel = TestAccountVM()
-    MainScreen(dummyViewModel)
+
 }
 
 @ExperimentalMaterial3Api
 @Composable
-fun MainScreen(accountViewModel: TestAccountVM) {
+fun MainScreen(navController: NavHostController, accountViewModel: AccountVM = koinViewModel()) {
     val scaffoldState = rememberBottomSheetScaffoldState()
     val scope = rememberCoroutineScope()
-    val accounts by remember { mutableStateOf(accountViewModel.accounts.toTypedArray()) }
-    val transactions by remember { mutableStateOf(accountViewModel.transactions.toTypedArray()) }
+    LaunchedEffect(Unit) {
+        accountViewModel.loadInitialData()
+    }
+
+    val accounts by remember { mutableStateOf(accountViewModel.accounts) }
+    val transactions by remember { mutableStateOf(accountViewModel.transactions) }
     var selectedAccount by remember { mutableStateOf(accounts.firstOrNull()) }
 
     val filteredTransactions = transactions.filter { it.accountId == selectedAccount?.id }
@@ -55,7 +61,7 @@ fun MainScreen(accountViewModel: TestAccountVM) {
                 })
             } else {
             SelectAccountBottomSheet(
-                accounts = accounts.toList(),
+                accounts = accounts,
                 onAccountSelected = { account ->
                     selectedAccount = account
                     accountViewModel.selectAccount(account)
@@ -97,11 +103,15 @@ fun MainScreen(accountViewModel: TestAccountVM) {
             }
 
             ViewAllBlock(onClick = {
+                navController.navigate("all_transactions")
             })
-            RecentTransactionsBlock(transactions = filteredTransactions)
+
+            RecentTransactionsBlock(transactions = filteredTransactions) { transaction ->
+                navController.navigate("transaction_screen/${transaction.id}")
+            }
 
             Button(
-                onClick = { },
+                onClick = {navController.navigate("transaction_screen") },
                 modifier = Modifier
                     .align(Alignment.End)
                     .padding(top = 16.dp),

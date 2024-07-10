@@ -14,28 +14,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.example.banking.AccountVM
 import com.example.banking.Model.Transaction
 import com.example.banking.ui.theme.TestAccountVM
 import com.example.banking.ui.theme.*
-
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview
-@Composable
-fun showTransactionScreen(){
-    val dummyViewModel = TestAccountVM()
-    TransactionScreen(dummyViewModel)
-}
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun TransactionScreen(viewModel: TestAccountVM , transaction: Transaction? = null) {
+fun TransactionScreen(navController: NavHostController, viewModel: AccountVM = koinViewModel(), transaction: Transaction? = null) {
     val transactionName by remember { mutableStateOf(transaction?.name ?: "") }
     val transactionNumber by remember { mutableStateOf(transaction?.number ?: "") }
     val transactionStatus by remember { mutableStateOf(transaction?.status ?: "") }
     val amount by remember { mutableStateOf(transaction?.amount ?: "") }
     val date by remember { mutableStateOf(transaction?.date ?: "") }
+
+
 
     Column(
         modifier = Modifier
@@ -60,7 +55,9 @@ fun TransactionScreen(viewModel: TestAccountVM , transaction: Transaction? = nul
         }
 
         Button(
-            onClick = { },
+            onClick = {
+                navController.popBackStack()
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp),
