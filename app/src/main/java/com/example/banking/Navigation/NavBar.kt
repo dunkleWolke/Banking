@@ -12,24 +12,26 @@ import com.example.banking.ui.theme.MainScreen
 import com.example.banking.ui.theme.TransactionScreen.AllTransactionsScreen
 import com.example.banking.ui.theme.TransactionScreen.TransactionScreen
 import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavGraph(navController: NavHostController) {
-    val accountViewModel: AccountVM = getViewModel()
 
     NavHost(navController = navController, startDestination = "main_screen") {
         composable("main_screen") {
-            MainScreen(navController = navController, accountViewModel = accountViewModel)
+            MainScreen(navController = navController, accountViewModel = koinViewModel())
         }
         composable("all_transactions") {
-            AllTransactionsScreen(navController = navController, accountViewModel = accountViewModel)
+            AllTransactionsScreen(navController = navController, accountViewModel = koinViewModel())
         }
         composable(
             "transaction_screen/{transactionId}",
             arguments = listOf(navArgument("transactionId") { type = NavType.IntType })
-        ) { navBackStackEntry ->
+        ) {
+            navBackStackEntry ->
+            val  accountViewModel: AccountVM = koinViewModel()
             val transactionId = navBackStackEntry.arguments?.getInt("transactionId")
             val transaction = transactionId?.let {
                 accountViewModel.transactions.firstOrNull { transaction -> transaction.id == it }
@@ -39,6 +41,7 @@ fun NavGraph(navController: NavHostController) {
         composable(
             "transaction_screen"
         ) {
+            val  accountViewModel: AccountVM = koinViewModel()
             TransactionScreen(navController = navController, viewModel = accountViewModel, transaction = null)
         }
     }
