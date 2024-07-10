@@ -1,4 +1,4 @@
-package com.example.banking.ui.theme
+package com.example.banking.screens.main.presentation.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,18 +18,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.banking.Model.Account
+import androidx.compose.ui.unit.sp
 import com.example.banking.R
+import com.example.banking.ui.theme.Gray
+import com.example.banking.ui.theme.White
+import com.example.banking.ui.theme.WhiteGray
+
 
 @Composable
-fun AccountItem(account: Account, onClick: () -> Unit) {
-    Column(   modifier = Modifier
-        .fillMaxWidth()
-        .clickable { onClick() }
-        .padding(16.dp)
-        .background(Gray, shape = RoundedCornerShape(9.dp))
-        .padding(16.dp) )
-    {
+fun AccountInfoBlock(accountName: String, accountNumber: String, cardNumber: String, onClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
+            .padding(16.dp)
+            .background(Gray, shape = RoundedCornerShape(9.dp))
+            .padding(16.dp)
+
+    ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
                 painter = painterResource(id = R.drawable.card),
@@ -37,14 +43,15 @@ fun AccountItem(account: Account, onClick: () -> Unit) {
                 modifier = Modifier.size(24.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Column(
-            ) {
-                Text(text = account.accountName, fontWeight = FontWeight.Bold, color = White)
-                Text(color = WhiteGray, text = "${account.accountNumber}")
+            Column {
                 Text(
-                    text = "${account.cardNumber.replaceRange(4, 12, "*".repeat(8))}",
-                    color = WhiteGray,
+                    text = accountName,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = White
                 )
+                Text(color = WhiteGray, text = "${accountNumber}")
+                Text(text = "${cardNumber.replaceRange(4, 12, "*".repeat(8))}", color = WhiteGray,)
             }
         }
     }

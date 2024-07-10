@@ -1,4 +1,4 @@
-package com.example.banking.ui.theme
+package com.example.banking.screens.main.presentation.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.banking.Model.Account
+import com.example.banking.database.model.Account
+import com.example.banking.ui.theme.White
 
 @Composable
 fun SelectAccountBottomSheet(accounts: List<Account>, onAccountSelected: (Account) -> Unit) {

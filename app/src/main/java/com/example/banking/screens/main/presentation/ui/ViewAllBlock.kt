@@ -1,4 +1,4 @@
-package com.example.banking.ui.theme
+package com.example.banking.screens.main.presentation.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.banking.ui.theme.Blue
+import com.example.banking.ui.theme.White
 
 @Composable
 fun ViewAllBlock(onClick: () -> Unit) {
