@@ -74,5 +74,7 @@ dependencies {
     annotationProcessor(libs.androidx.room.room.compiler)
     ksp(libs.androidx.room.room.compiler)
     implementation ("io.insert-koin:koin-androidx-compose:3.5.0")
+    implementation ("androidx.navigation:navigation-compose:2.5.3")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.5.3")
 }
 
