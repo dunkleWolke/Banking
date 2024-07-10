@@ -22,6 +22,7 @@ import com.example.banking.R
 import com.example.banking.Model.Transaction
 import com.example.banking.ui.theme.TransactionScreen.FilterByDateBottomSheet
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,7 +34,7 @@ fun MainActivity(){
 
 @ExperimentalMaterial3Api
 @Composable
-fun MainScreen(navController: NavHostController, accountViewModel: AccountVM) {
+fun MainScreen(navController: NavHostController, accountViewModel: AccountVM = koinViewModel()) {
     val scaffoldState = rememberBottomSheetScaffoldState()
     val scope = rememberCoroutineScope()
     LaunchedEffect(Unit) {

@@ -34,12 +34,12 @@ fun NavGraph(navController: NavHostController) {
             val transaction = transactionId?.let {
                 accountViewModel.transactions.firstOrNull { transaction -> transaction.id == it }
             }
-            TransactionScreen(navController = navController, viewModel = accountViewModel, transaction = transaction)
+            TransactionScreen(navController = navController, transaction = transaction)
         }
         composable(
             "transaction_screen"
         ) {
-            TransactionScreen(navController = navController, viewModel = accountViewModel, transaction = null)
+            TransactionScreen(navController = navController, transaction = null)
         }
     }
 }

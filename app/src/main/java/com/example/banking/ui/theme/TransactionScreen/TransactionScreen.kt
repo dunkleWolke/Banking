@@ -19,13 +19,11 @@ import com.example.banking.AccountVM
 import com.example.banking.Model.Transaction
 import com.example.banking.ui.theme.TestAccountVM
 import com.example.banking.ui.theme.*
-
-
-
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun TransactionScreen(navController: NavHostController, viewModel: AccountVM, transaction: Transaction? = null) {
+fun TransactionScreen(navController: NavHostController, viewModel: AccountVM = koinViewModel(), transaction: Transaction? = null) {
     val transactionName by remember { mutableStateOf(transaction?.name ?: "") }
     val transactionNumber by remember { mutableStateOf(transaction?.number ?: "") }
     val transactionStatus by remember { mutableStateOf(transaction?.status ?: "") }

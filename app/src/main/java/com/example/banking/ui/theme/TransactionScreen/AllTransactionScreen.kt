@@ -40,6 +40,7 @@ import com.example.banking.ui.theme.TestAccountVM
 import com.example.banking.ui.theme.TransactionItem
 import com.example.banking.ui.theme.White
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @Preview
 @Composable
@@ -51,7 +52,7 @@ fun ShowAllTransaction() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AllTransactionsScreen(navController: NavHostController, accountViewModel: AccountVM) {
+fun AllTransactionsScreen(navController: NavHostController, accountViewModel: AccountVM = koinViewModel()) {
     val scaffoldState = rememberBottomSheetScaffoldState()
     val scope = rememberCoroutineScope()
     val accounts by remember { mutableStateOf(accountViewModel.accounts) }
