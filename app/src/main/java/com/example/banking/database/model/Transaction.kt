@@ -1,4 +1,4 @@
-package com.example.banking.Model
+package com.example.banking.database.model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
