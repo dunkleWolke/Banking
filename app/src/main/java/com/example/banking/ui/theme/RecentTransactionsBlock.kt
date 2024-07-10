@@ -5,13 +5,13 @@ import androidx.compose.runtime.Composable
 import com.example.banking.Model.Transaction
 
 @Composable
-fun RecentTransactionsBlock(transactions: List<Transaction>) {
+fun RecentTransactionsBlock(transactions: List<Transaction>, onItemClick: (Transaction) -> Unit) {
     val sortedTransactions = transactions.sortedByDescending { it.date }
     val recentTransactions = sortedTransactions.take(5)
 
     Column {
        recentTransactions.forEach { transaction ->
-            TransactionItem(transaction)
+            TransactionItem(transaction, onItemClick)
         }
     }
 }
