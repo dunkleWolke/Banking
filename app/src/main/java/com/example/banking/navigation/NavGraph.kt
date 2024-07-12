@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.banking.screens.allTransactions.presentation.ui.AllTransactionsScreen
 
 import com.example.banking.screens.main.presentation.ui.MainScreen
 import com.example.banking.screens.transactions.presentation.ui.TransactionScreen
@@ -35,6 +36,20 @@ fun NavGraph(startDestination: String = Screen.Home.route) {
             val accountId = backStackEntry.arguments?.getInt("accountId")
             val actualTransactionId = if (transactionId == -1) null else transactionId
             TransactionScreen(transactionId = actualTransactionId, accountId = accountId, navController = navController)
+        }
+
+        composable(
+            route = Screen.AllTransaction.route,
+            arguments = listOf(
+                navArgument("accountId") {
+                    type = NavType.IntType
+                }
+            )
+        ) { backStackEntry ->
+            val accountId = backStackEntry.arguments?.getInt("accountId")
+            if (accountId != null) {
+                AllTransactionsScreen(accountId = accountId, navController = navController)
+            }
         }
     }
 }

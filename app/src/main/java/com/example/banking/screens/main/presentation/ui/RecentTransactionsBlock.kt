@@ -6,13 +6,15 @@ import com.example.banking.database.model.Transaction
 import com.example.banking.screens.transactions.presentation.ui.TransactionItem
 
 @Composable
-fun RecentTransactionsBlock(transactions: List<Transaction>,  onTransactionClick: (Transaction) -> Unit) {
-    val sortedTransactions = transactions.sortedByDescending { it.date }
-    val recentTransactions = sortedTransactions.take(5)
+fun RecentTransactionsBlock(transactions: List<Transaction>?, onTransactionClick: (Transaction) -> Unit) {
+    val sortedTransactions = transactions?.sortedByDescending { it.date }
+    val recentTransactions = sortedTransactions?.take(5)
 
     Column {
-       recentTransactions.forEach { transaction ->
-            TransactionItem(transaction, onTransactionClick)
-      }
+        if (recentTransactions != null) {
+            recentTransactions.forEach { transaction ->
+                TransactionItem(transaction, onTransactionClick)
+            }
+        }
     }
 }

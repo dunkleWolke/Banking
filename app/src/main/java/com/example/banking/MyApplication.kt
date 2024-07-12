@@ -3,6 +3,7 @@ package com.example.banking;
 import android.app.Application
 
 import com.example.banking.database.koin.databaseModule
+import com.example.banking.screens.allTransactions.koin.allTransactionModule
 import com.example.banking.screens.main.domain.InitialDataRepository
 import com.example.banking.screens.main.koin.mainModule
 import com.example.banking.screens.transactions.koin.transactionModule
@@ -19,7 +20,7 @@ class MyApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@MyApplication)
-            modules(databaseModule, mainModule, transactionModule)
+            modules(databaseModule, mainModule, transactionModule, allTransactionModule)
         }
         val initialDataRepository: InitialDataRepository by inject()
         CoroutineScope(Dispatchers.IO).launch {

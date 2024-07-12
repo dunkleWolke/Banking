@@ -2,10 +2,8 @@ package com.example.banking.screens.transactions.koin
 
 
 import com.example.banking.screens.transactions.data.TransactionRepositoryImpl
-import com.example.banking.screens.transactions.domain.AccountRepository
-import com.example.banking.screens.main.domain.InitialDataRepository
-import com.example.banking.screens.transactions.domain.TransactionRepository
-import com.example.banking.screens.main.presentation.viewmodel.MainViewModel
+import com.example.banking.screens.transactions.domain.repository.AccountRepository
+import com.example.banking.screens.transactions.domain.repository.TransactionRepository
 import com.example.banking.screens.transactions.data.AccountRepositoryImpl
 import com.example.banking.screens.transactions.presentation.viewmodel.TransactionViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel

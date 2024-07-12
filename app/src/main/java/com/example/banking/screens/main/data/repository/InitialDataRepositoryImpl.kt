@@ -16,7 +16,6 @@ class InitialDataRepositoryImpl(
 ) : InitialDataRepository {
 
     override suspend fun clearDatabase() {
-
         transactionDao.deleteAllTransactions()
         accountDao.deleteAllAccounts()
     }
@@ -46,7 +45,7 @@ class InitialDataRepositoryImpl(
             val accountId3 = accountRepository.getAccountIdByName("third")
 
             val transaction1 =
-                Transaction(1, accountId1!!, "Company1", "12345", "2024-07-02", "Pending", "100.00")
+                Transaction(1, accountId1!!, "Company1", "12345", "15/07/2024", "Pending", "100.00")
             val transaction2 = Transaction(
                 2,
                 accountId2!!,
@@ -57,7 +56,7 @@ class InitialDataRepositoryImpl(
                 "150.00"
             )
             val transaction3 =
-                Transaction(3, accountId3!!, "Company3", "54321", "2024-07-02", "Completed", "200.00")
+                Transaction(3, accountId3!!, "Company3", "54321", "02/07/2024", "Completed", "200.00")
 
             transactionRepository.insertTransaction(transaction1)
             transactionRepository.insertTransaction(transaction2)
